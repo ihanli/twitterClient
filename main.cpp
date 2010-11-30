@@ -11,121 +11,45 @@
 #include <sstream>
 #include <string>
 #include "TwitterClient.h"
-#include <conio.h>
+
 #include <vector>
 
 using namespace std;
 
-//char message[140];
-//string tweeterName;
-//vector<char*> incomingTweets;
-
-//void* doit(void* arg)
-//{
-//	char* argCopy = ((char *) arg);
-//	free(arg);
-//	pthread_detach(pthread_self());
-//	myClient.receive(message);
-////
-////	if()
-//
-//	printf("%s", message);
-//	printf("\nu sayin': ");
-//}
-
 int main(int argc, char **argv)
 {
 	string input;
-	char message[140];
+	string kbInput;
+	char* message;
+	bool eod = true;
 
 	printf("Please enter an IP and port (port is optional).\n");
 	getline(cin, input);
 
     TwitterClient myClient(input.c_str());
 
+    message = new char[myClient.getBufferSize()];
+
 	try
 	{
 		myClient.connectToServer();			// connect with server
+
+   		while(true)
+   		{
+   			printf("\n>");
+        	getline(cin, input);
+
+        	myClient.sendToServer(input.c_str());
+        	myClient.receive(message);
+        	printf("%s", message);
+    	}
 	}
 	catch(const char* failure)
 	{
 		printf("%s", failure);
 	}
 
-	while(true)
-	{
-		if(kbhit())
-		{
-			char commandFlag = getch();
-
-			if(commandFlag == ':')
-			{
-				getline(cin, input);
-
-				try
-				{
-        			myClient.sendToServer(input.c_str());
-				}
-        		catch(const char* failure){
-           			printf("%s", failure);
-           			break;
-        		}
-			}
-		}
-		else
-		{
-			try
-			{
-				myClient.receive(message);
-				printf("%s", message);
-			}
-			catch(const char* failure){
-				printf("%s", failure);
-				break;
-			}
-		}
-	}
-
-//	string input;
-//	string kbInput;
-//
-//	pthread_t pid;
-//	int *iptr;
-//
-//	printf("Please enter an IP and port (port is optional).\n");
-//	getline(cin, input);
-//
-//    TwitterClient myClient(input.c_str());
-//
-//	try
-//	{
-//		myClient.connectToServer();			// connect with server
-//	}
-//	catch(const char* failure)
-//	{
-//		printf("%s", failure);
-//	}
-//
-////	pthread_create(&pid, NULL, &myClient.receive, message);
-//
-//	printf("\nu sayin': ");
-//
-//    while(1){
-//    //	iptr = malloc(sizeof(int));
-//
-//
-//        getline(cin, input);
-//
-//        try{
-//
-//        	myClient.sendToServer(input.c_str());
-//
-//			//*iptr = myClient.receive(message);
-//        }
-//        catch(const char* failure){
-//            printf("%s", failure);
-//        }
-//    }
+	delete [] message;
 
     return 0;
 }

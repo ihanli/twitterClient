@@ -27,7 +27,8 @@ TwitterClient::TwitterClient(const char* hostIP, const unsigned short port, unsi
 	}
 }
 
-TwitterClient::~TwitterClient(void){
+TwitterClient::~TwitterClient(void)
+{
     closesocket(clientSocket);
     WSACleanup();
 }
@@ -48,7 +49,8 @@ void TwitterClient::connectToServer(void)
 
 }
 
-void TwitterClient::sendToServer(const char* message){
+void TwitterClient::sendToServer(const char* message)
+{
     int errorCode;
 
 	errorCode = send(clientSocket, message, bufferSize, 0);	// sending
@@ -58,7 +60,8 @@ void TwitterClient::sendToServer(const char* message){
 
 }
 
-void TwitterClient::receive(char* buffer){
+void TwitterClient::receive(char* buffer)
+{
     int errorCode;
 
 	errorCode = recv(clientSocket, buffer, bufferSize, 0);	// receiving

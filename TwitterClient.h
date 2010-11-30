@@ -10,6 +10,7 @@
 #ifndef TWITTERCLIENT_H_INCLUDED
 #define TWITTERCLIENT_H_INCLUDED
 
+#include <pthread.h>
 #include "SocketBase.h"
 
 using namespace std;
@@ -28,7 +29,6 @@ class TwitterClient{
 		SOCKET clientSocket;		// socket for client
 		SOCKADDR_IN hostAddr;		// host address
 		SocketBase socketCreator;
-		void* doit(void* arg);
 
 		char message[140];
 		unsigned int bufferSize;	// message size
