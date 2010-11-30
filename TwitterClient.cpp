@@ -1,6 +1,6 @@
-#include "Client.h"
+#include "TwitterClient.h"
 
-Client::Client(const char* hostIP, const unsigned short port, unsigned int size, const int af, const WORD version, const int type, const int protocol) :
+TwitterClient::TwitterClient(const char* hostIP, const unsigned short port, unsigned int size, const int af, const WORD version, const int type, const int protocol) :
                socketCreator(version, type, protocol), bufferSize(size)
 {
     memset(&hostAddr, 0, sizeof(SOCKADDR_IN));
@@ -16,12 +16,12 @@ Client::Client(const char* hostIP, const unsigned short port, unsigned int size,
     }
 }
 
-Client::~Client(void){
+TwitterClient::~TwitterClient(void){
     closesocket(clientSocket);
     WSACleanup();
 }
 
-void Client::connectToServer(void){
+void TwitterClient::connectToServer(void){
     int errorCode;
 
     printf("\nConnecting to host...");
@@ -36,7 +36,7 @@ void Client::connectToServer(void){
     }
 }
 
-void Client::sendToServer(const char* message){
+void TwitterClient::sendToServer(const char* message){
     int errorCode;
 
     errorCode = send(clientSocket, message, bufferSize, 0);
@@ -46,7 +46,7 @@ void Client::sendToServer(const char* message){
     }
 }
 
-void Client::receive(char * buffer){
+void TwitterClient::receive(char* buffer){
     int errorCode;
 
     errorCode = recv(clientSocket, buffer, bufferSize, 0);
@@ -59,6 +59,6 @@ void Client::receive(char * buffer){
     }
 }
 
-unsigned int Client::getBufferSize(void){ return bufferSize; }
+unsigned int TwitterClient::getBufferSize(void){ return bufferSize; }
 
-void Client::setBufferSize(unsigned int size){ bufferSize = size; }
+void TwitterClient::setBufferSize(unsigned int size){ bufferSize = size; }
