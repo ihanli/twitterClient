@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1291127792 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\socketbase.cpp
+	"SocketBase.h"
+
+1291127792 d:\fhs\ws10\multimediale netzwerke\twitterclient\socketbase.h
+	<cstdio>
+	<winsock2.h>
+
+1291069406 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.cpp
+	"TwitterClient.h"
+
+1291128127 d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.h
+	"SocketBase.h"
+
+1291015872 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\exceptiontexter.cpp
+	"ExceptionTexter.h"
+
+1291015872 d:\fhs\ws10\multimediale netzwerke\twitterclient\exceptiontexter.h
+	<string>
+	<sstream>
+	<cstdio>
+
+1291127903 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\main.cpp
+	<iostream>
+	<sstream>
+	<string>
+	"TwitterClient.h"
+	<pthread.h>
+	<vector>
+

@@ -1,3 +1,12 @@
+/*###############################
+# FH Salzburg                   #
+# WS2010 MMT-B2009              #
+# Multimediale Netzwerke        #
+# Uebungsprojekt                #
+# Fritsch Andreas, Hanli Ismail #
+# Sun, 28.11.2010 22:00         #
+###############################*/
+
 #ifndef TWITTERCLIENT_H_INCLUDED
 #define TWITTERCLIENT_H_INCLUDED
 
@@ -15,11 +24,11 @@ class TwitterClient{
         unsigned int getBufferSize(void);
         void setBufferSize(unsigned int size);
 
-    private:
-        SOCKET clientSocket;
-        SOCKADDR_IN hostAddr;
-        SocketBase socketCreator;
-        unsigned int bufferSize;
+	private:
+		SOCKET clientSocket;		// socket for client
+		SOCKADDR_IN hostAddr;		// host address
+		SocketBase socketCreator;
+		unsigned int bufferSize;	// message size
 };
 
 #endif // CLIENT_H_INCLUDED

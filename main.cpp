@@ -1,3 +1,12 @@
+/*###############################
+# FH Salzburg                   #
+# WS2010 MMT-B2009              #
+# Multimediale Netzwerke        #
+# Uebungsprojekt                #
+# Fritsch Andreas, Hanli Ismail #
+# Sun, 28.11.2010 22:00         #
+###############################*/
+
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -23,8 +32,6 @@ void* doit(void* arg)
 	printf("\nu sayin': ");
 }
 
-
-
 int main(int argc, char **argv)
 {
 	string input;
@@ -38,12 +45,14 @@ int main(int argc, char **argv)
 
     TwitterClient myClient(input.c_str());
 
-    try{
-        myClient.connectToServer();
-    }
-    catch(const char* failure){
-        printf("%s", failure);
-    }
+	try
+	{
+		myClient.connectToServer();			// connect with server
+	}
+	catch(const char* failure)
+	{
+		printf("%s", failure);
+	}
 
 	printf("\nu sayin': ");
 
