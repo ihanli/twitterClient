@@ -28,6 +28,9 @@ class TwitterClient{
 		SOCKET clientSocket;		// socket for client
 		SOCKADDR_IN hostAddr;		// host address
 		SocketBase socketCreator;
+		void* doit(void* arg);
+
+		char message[140];
 		unsigned int bufferSize;	// message size
 };
 
