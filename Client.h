@@ -26,10 +26,10 @@ class Client
 		void setBufferSize(unsigned int size);
 
 	private:
-		SOCKET clientSocket;
-		SOCKADDR_IN hostAddr;
+		SOCKET clientSocket;		// socket for client
+		SOCKADDR_IN hostAddr;		// host address
 		SocketBase socketCreator;
-		unsigned int bufferSize;
+		unsigned int bufferSize;	// message size
 };
 
 #endif // CLIENT_H_INCLUDED

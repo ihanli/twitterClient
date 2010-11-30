@@ -14,7 +14,7 @@
 
 using namespace std;
 
-int main(int argc, char **argv)
+int main(int argc, char **argv)		// possibility to start the client with arguments
 {
 	string input;
 	char kbInput[140];
@@ -27,15 +27,15 @@ int main(int argc, char **argv)
 //	scanf("%s", *argv);
 // }
 
-	printf("Please enter an IP and port (port is optional).\n");
-	getline(cin, input);
+//	printf("Please enter an IP and port (port is optional).\n");
+//	getline(cin, input);
 //	scanf("%s", kbInput);
 
-	Client myClient("127.0.0.1");//input.c_str());
+	Client myClient("127.0.0.1");//input.c_str());		// create client with port and ip
 
 	try
 	{
-		myClient.connectToServer();
+		myClient.connectToServer();			// connect with server
 	}
 	catch(const char* failure)
 	{
@@ -44,11 +44,11 @@ int main(int argc, char **argv)
 
 	printf("\n");
 
-	while(1)
+	while(true)
 	{
 		printf("u sayin': ");
 		getline(cin, input);
-		while(input.length() > 140)
+		while(input.length() > 140)		// check for the user if entered message is too long
 		{
 			printf("You entered %d letters. Only 140 allowed.\nEnter new message: ", input.length());
 			getline(cin, input);
@@ -63,13 +63,13 @@ int main(int argc, char **argv)
 //          break;
 //      }
 
-		try
+		try		// send and receive
 		{
 			myClient.sendToServer(input.c_str());
 			myClient.receive(message);
 			printf("server echoin': %s\n", message);
 		}
-		catch(const char* failure)
+		catch(const char* failure)		// exception handling
 		{
 			printf("%s", failure);
 		}

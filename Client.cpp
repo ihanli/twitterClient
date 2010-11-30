@@ -13,13 +13,13 @@ Client::Client(const char* hostIP, const unsigned short port, unsigned int size,
 			   socketCreator(version, type, protocol), bufferSize(size)
 {
 	memset(&hostAddr, 0, sizeof(SOCKADDR_IN));
-	hostAddr.sin_family = af;
+	hostAddr.sin_family = af;						// set host address
 	hostAddr.sin_port = htons(port);
 	hostAddr.sin_addr.s_addr = inet_addr(hostIP);
 
 	try
 	{
-		socketCreator.createSocket(&clientSocket, af);
+		socketCreator.createSocket(&clientSocket, af);	// try to create clientsocket
 	}
 	catch(unsigned char* e)
 	{
@@ -29,7 +29,7 @@ Client::Client(const char* hostIP, const unsigned short port, unsigned int size,
 
 Client::~Client(void)
 {
-	closesocket(clientSocket);
+	closesocket(clientSocket);		// destructor, cleanup
 	WSACleanup();
 }
 
@@ -39,9 +39,9 @@ void Client::connectToServer(void)
 
 	printf("\nConnecting to host...");
 
-	errorCode = connect(clientSocket, (SOCKADDR*) &hostAddr, sizeof(SOCKADDR));
+	errorCode = connect(clientSocket, (SOCKADDR*) &hostAddr, sizeof(SOCKADDR));		// connecting
 
-	if(errorCode == SOCKET_ERROR)
+	if(errorCode == SOCKET_ERROR)					// error handling
 		throw "\nFAIL: Connecting failed!";
 
 	else
@@ -53,9 +53,9 @@ void Client::sendToServer(const char* message)
 {
 	int errorCode;
 
-	errorCode = send(clientSocket, message, bufferSize, 0);
+	errorCode = send(clientSocket, message, bufferSize, 0);	// sending
 
-	if(errorCode == SOCKET_ERROR)
+	if(errorCode == SOCKET_ERROR)							// error handling
 		throw "\nFAIL: Unable to send message!";
 
 }
@@ -64,9 +64,9 @@ void Client::receive(char * buffer)
 {
 	int errorCode;
 
-	errorCode = recv(clientSocket, buffer, bufferSize, 0);
+	errorCode = recv(clientSocket, buffer, bufferSize, 0);	// receiving
 
-	if(errorCode == 0)
+	if(errorCode == 0)										// error handling
 		throw "\nFAIL: Lost connection to server!";
 	
 	else if(errorCode == SOCKET_ERROR)
@@ -74,7 +74,7 @@ void Client::receive(char * buffer)
 
 }
 
-unsigned int Client::getBufferSize(void)
+unsigned int Client::getBufferSize(void)					// helper functions
 {
 	return bufferSize;
 }
