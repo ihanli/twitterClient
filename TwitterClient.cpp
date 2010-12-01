@@ -12,14 +12,17 @@
 TwitterClient::TwitterClient(const char* hostIP, const unsigned short port, unsigned int size, const int af, const WORD version, const int type, const int protocol) :
                socketCreator(version, type, protocol), bufferSize(size)
 {
-	memset(&hostAddr, 0, sizeof(SOCKADDR_IN));
-	hostAddr.sin_family = af;						// set host address
-	hostAddr.sin_port = htons(port);
-	hostAddr.sin_addr.s_addr = inet_addr(hostIP);
-
 	try
 	{
+		memset(&hostAddr, 0, sizeof(SOCKADDR_IN));
+		hostAddr.sin_family = af;						// set host address
+		hostAddr.sin_port = htons(port);
+		hostAddr.sin_addr.s_addr = inet_addr(hostIP);
+
 		socketCreator.createSocket(&clientSocket, af);	// try to create clientsocket
+
+		FD_ZERO(&actionFlag);
+		FD_SET(clientSocket, &actionFlag);
 	}
 	catch(unsigned char* e)
 	{
@@ -35,6 +38,7 @@ TwitterClient::~TwitterClient(void)
 
 void TwitterClient::connectToServer(void)
 {
+
 	int errorCode;
 
 	printf("\nConnecting to host...");
@@ -47,6 +51,63 @@ void TwitterClient::connectToServer(void)
 	else
 		printf("\nSUCCESS: Connected to %s!", inet_ntoa(hostAddr.sin_addr));
 
+}
+
+void TwitterClient::serverListener(void)
+{
+	int errorCode;
+
+	errorCode = select(1, &actionFlag, NULL, NULL, 0);
+
+	if(errorCode == SOCKET_ERROR)							// check for error
+		throw exceptionTexter("\nFAIL: Something went wrong with SELECT! (Error Code: ", errorCode);
+
+	if(FD_ISSET(clientSocket, &actionFlag))
+	{
+		try
+		{
+			while(true)
+			{
+				receive(message);
+
+				if(!strcmp("ETX", message))
+				{
+					break;
+				}
+
+				printf("%s", message);
+				//printf("\n%d\n", foo);
+			}
+			//receive(message);
+
+		}
+		catch(string failure)
+		{
+			printf("%s", failure.c_str());
+
+			closesocket(clientSocket);
+			closesocket(serverSocket);
+			FD_ZERO(&actionFlag);
+			FD_SET(clientSocket, &actionFlag);
+		}
+	}
+//	else
+//	{
+		try
+		{
+			printf("\n>");
+			getline(cin, input);
+			sendToServer(input.c_str());
+		}
+		catch(string failure)
+		{
+			printf("%s", failure.c_str());
+		}
+
+//	}
+
+//	FD_ZERO(&actionFlag);
+//	FD_SET(clientSocket, &actionFlag);
 }
 
 void TwitterClient::sendToServer(const char* message)

@@ -6,12 +6,15 @@
 	<cstdio>
 	<winsock2.h>
 
-1291146191 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.cpp
+1291236175 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.cpp
 	"TwitterClient.h"
 
-1291146134 d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.h
+1291232366 d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.h
 	<pthread.h>
+	<iostream>
+	<string>
 	"SocketBase.h"
+	"ExceptionTexter.h"
 
 1291015872 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\exceptiontexter.cpp
 	"ExceptionTexter.h"
@@ -21,10 +24,7 @@
 	<sstream>
 	<cstdio>
 
-1291147612 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\main.cpp
-	<iostream>
-	<sstream>
-	<string>
+1291234567 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\main.cpp
 	"TwitterClient.h"
 	<vector>
 

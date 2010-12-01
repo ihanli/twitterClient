@@ -7,9 +7,7 @@
 # Sun, 28.11.2010 22:00         #
 ###############################*/
 
-#include <iostream>
-#include <sstream>
-#include <string>
+//#include <iostream>
 #include "TwitterClient.h"
 
 #include <vector>
@@ -33,15 +31,19 @@ int main(int argc, char **argv)
 	try
 	{
 		myClient.connectToServer();			// connect with server
+		printf("\n>");
+		getline(cin, input);
+		myClient.sendToServer(input.c_str());
 
    		while(true)
    		{
-   			printf("\n>");
-        	getline(cin, input);
-
-        	myClient.sendToServer(input.c_str());
-        	myClient.receive(message);
-        	printf("%s", message);
+   			myClient.serverListener();
+//   			printf("\n>");
+//        	getline(cin, input);
+//
+//        	myClient.sendToServer(input.c_str());
+//        	myClient.receive(message);
+//        	printf("%s", message);
     	}
 	}
 	catch(const char* failure)
