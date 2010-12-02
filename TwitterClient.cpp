@@ -20,9 +20,6 @@ TwitterClient::TwitterClient(const char* hostIP, const unsigned short port, unsi
 		hostAddr.sin_addr.s_addr = inet_addr(hostIP);
 
 		socketCreator.createSocket(&clientSocket, af);	// try to create clientsocket
-
-		FD_ZERO(&actionFlag);
-		FD_SET(clientSocket, &actionFlag);
 	}
 	catch(unsigned char* e)
 	{
@@ -49,21 +46,16 @@ void TwitterClient::connectToServer(void)
 		throw "\nFAIL: Connecting failed!";
 
 	else
+	{
 		printf("\nSUCCESS: Connected to %s!", inet_ntoa(hostAddr.sin_addr));
-
+		printf("\n>");
+		getline(cin, input);
+		sendToServer(input.c_str());
+	}
 }
 
 void TwitterClient::serverListener(void)
 {
-	int errorCode;
-
-	errorCode = select(1, &actionFlag, NULL, NULL, 0);
-
-	if(errorCode == SOCKET_ERROR)							// check for error
-		throw exceptionTexter("\nFAIL: Something went wrong with SELECT! (Error Code: ", errorCode);
-
-	if(FD_ISSET(clientSocket, &actionFlag))
-	{
 		try
 		{
 			while(true)
@@ -75,39 +67,30 @@ void TwitterClient::serverListener(void)
 					break;
 				}
 
-				printf("%s", message);
-				//printf("\n%d\n", foo);
+				printf(">%s", message);
 			}
-			//receive(message);
 
-		}
-		catch(string failure)
-		{
-			printf("%s", failure.c_str());
-
-			closesocket(clientSocket);
-			closesocket(serverSocket);
-			FD_ZERO(&actionFlag);
-			FD_SET(clientSocket, &actionFlag);
-		}
-	}
-//	else
-//	{
-		try
-		{
-			printf("\n>");
+			printf(">");
 			getline(cin, input);
 			sendToServer(input.c_str());
 		}
 		catch(string failure)
 		{
 			printf("%s", failure.c_str());
+
+			closesocket(clientSocket);
 		}
 
-//	}
-
-//	FD_ZERO(&actionFlag);
-//	FD_SET(clientSocket, &actionFlag);
+//		try
+//		{
+//			printf("\n>");
+//			getline(cin, input);
+//			sendToServer(input.c_str());
+//		}
+//		catch(string failure)
+//		{
+//			printf("%s", failure.c_str());
+//		}
 }
 
 void TwitterClient::sendToServer(const char* message)

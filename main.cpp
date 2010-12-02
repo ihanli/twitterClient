@@ -10,8 +10,6 @@
 //#include <iostream>
 #include "TwitterClient.h"
 
-#include <vector>
-
 using namespace std;
 
 int main(int argc, char **argv)
@@ -19,7 +17,6 @@ int main(int argc, char **argv)
 	string input;
 	string kbInput;
 	char* message;
-	bool eod = true;
 
 	printf("Please enter an IP and port (port is optional).\n");
 	getline(cin, input);
@@ -31,19 +28,10 @@ int main(int argc, char **argv)
 	try
 	{
 		myClient.connectToServer();			// connect with server
-		printf("\n>");
-		getline(cin, input);
-		myClient.sendToServer(input.c_str());
 
    		while(true)
    		{
    			myClient.serverListener();
-//   			printf("\n>");
-//        	getline(cin, input);
-//
-//        	myClient.sendToServer(input.c_str());
-//        	myClient.receive(message);
-//        	printf("%s", message);
     	}
 	}
 	catch(const char* failure)

@@ -9,7 +9,7 @@
 1291236175 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.cpp
 	"TwitterClient.h"
 
-1291232366 d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.h
+1291276267 d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.h
 	<pthread.h>
 	<iostream>
 	<string>
@@ -24,7 +24,7 @@
 	<sstream>
 	<cstdio>
 
-1291234567 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\main.cpp
+1291276550 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\main.cpp
 	"TwitterClient.h"
 	<vector>
 

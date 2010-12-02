@@ -10,7 +10,6 @@
 #ifndef TWITTERCLIENT_H_INCLUDED
 #define TWITTERCLIENT_H_INCLUDED
 
-#include <pthread.h>
 #include <iostream>
 #include <string>
 #include "SocketBase.h"
@@ -33,8 +32,6 @@ class TwitterClient{
 		SOCKET clientSocket;		// socket for client
 		SOCKADDR_IN hostAddr;		// host address
 		SocketBase socketCreator;
-		FD_SET actionFlag;
-		SOCKET serverSocket;
 
 		char message[140];
 		string input;
