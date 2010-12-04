@@ -33,6 +33,14 @@ TwitterClient::~TwitterClient(void)
     WSACleanup();
 }
 
+void* listenThread(void* arg);
+
+struct threadParam
+{
+	TwitterClient* client;
+	SOCKET* socket;
+};
+
 void TwitterClient::connectToServer(void)
 {
 
@@ -54,68 +62,79 @@ void TwitterClient::connectToServer(void)
 	}
 }
 
-void TwitterClient::serverListener(void)
+void* listenThread(void* arg)
 {
-		try
+	char message[140];
+	string input;
+	threadParam threadArg = *((threadParam*) arg);
+
+	pthread_detach(pthread_self());
+	free(arg);
+
+	try
+	{
+		while(true)
 		{
-			while(true)
+			threadArg.client->receive(message);
+
+			if(!strcmp("ETX", message))
 			{
-				receive(message);
-
-				if(!strcmp("ETX", message))
-				{
-					break;
-				}
-
-				printf(">%s", message);
+				printf(">");
+				getline(cin, input);
+				threadArg.client->sendToServer(input.c_str());
+				break;
 			}
 
-			printf(">");
-			getline(cin, input);
-			sendToServer(input.c_str());
+			printf(">%s", message);
 		}
-		catch(string failure)
-		{
-			printf("%s", failure.c_str());
+	}
+	catch(string failure)
+	{
+		printf("%s", failure.c_str());
 
-			closesocket(clientSocket);
-		}
+		closesocket(*threadArg.socket);
+	}
+}
 
-//		try
-//		{
-//			printf("\n>");
-//			getline(cin, input);
-//			sendToServer(input.c_str());
-//		}
-//		catch(string failure)
-//		{
-//			printf("%s", failure.c_str());
-//		}
+void TwitterClient::serverListener(void)
+{
+	pthread_t pid;
+	threadParam* classPointer;
+
+	classPointer = (threadParam*) malloc(sizeof(threadParam));
+
+	classPointer->client = this;
+	classPointer->socket = &clientSocket;
+
+	pthread_create(&pid, NULL, &listenThread, classPointer);
 }
 
 void TwitterClient::sendToServer(const char* message)
 {
     int errorCode;
 
-	errorCode = send(clientSocket, message, bufferSize, 0);	// sending
+	errorCode = send(clientSocket, message, bufferSize, 0);
 
-	if(errorCode == SOCKET_ERROR)							// error handling
+	if(errorCode == SOCKET_ERROR)
+	{
 		throw "\nFAIL: Unable to send message!";
-
+	}
 }
 
 void TwitterClient::receive(char* buffer)
 {
     int errorCode;
 
-	errorCode = recv(clientSocket, buffer, bufferSize, 0);	// receiving
+	errorCode = recv(clientSocket, buffer, bufferSize, 0);
 
-	if(errorCode == 0)										// error handling
+	if(errorCode == 0)
+	{
 		throw "\nFAIL: Lost connection to server!";
-
+	}
 	else if(errorCode == SOCKET_ERROR)
+	{
 		throw "\nFAIL: Unable to receive message!";
-
+	}
 }
 
 unsigned int TwitterClient::getBufferSize(void){ return bufferSize; }

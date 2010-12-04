@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <string>
+#include <pthread.h>
 #include "SocketBase.h"
 #include "ExceptionTexter.h"
 
@@ -27,15 +28,14 @@ class TwitterClient{
         unsigned int getBufferSize(void);
         void setBufferSize(unsigned int size);
         void serverListener(void);
+//        void* listenThread(void* arg);
 
 	private:
-		SOCKET clientSocket;		// socket for client
-		SOCKADDR_IN hostAddr;		// host address
+		SOCKET clientSocket;
+		SOCKADDR_IN hostAddr;
 		SocketBase socketCreator;
-
-		char message[140];
 		string input;
-		unsigned int bufferSize;	// message size
+		unsigned int bufferSize;
 };
 
 #endif // CLIENT_H_INCLUDED

@@ -32,6 +32,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="ExceptionTexter.cpp" />
+		<Unit filename="ExceptionTexter.h" />
+		<Unit filename="SocketBase.cpp" />
+		<Unit filename="SocketBase.h" />
+		<Unit filename="TwitterClient.cpp" />
+		<Unit filename="TwitterClient.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
