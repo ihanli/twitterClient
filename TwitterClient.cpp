@@ -38,7 +38,7 @@ void* listenThread(void* arg);
 struct threadParam
 {
 	TwitterClient* client;
-	SOCKET* socket;
+	SOCKET socket;
 };
 
 void TwitterClient::connectToServer(void)
@@ -64,12 +64,13 @@ void TwitterClient::connectToServer(void)
 
 void* listenThread(void* arg)
 {
+	pthread_detach(pthread_self());
+
+	threadParam threadArg = *((threadParam*) arg);
+	free(arg);
+
 	char message[140];
 	string input;
-	threadParam threadArg = *((threadParam*) arg);
-
-	pthread_detach(pthread_self());
-	free(arg);
 
 	try
 	{
@@ -88,25 +89,22 @@ void* listenThread(void* arg)
 			printf(">%s", message);
 		}
 	}
-	catch(string failure)
+	catch(const char* failure)
 	{
-		printf("%s", failure.c_str());
-
-		closesocket(*threadArg.socket);
+		closesocket(threadArg.socket);
+		printf("%s", failure);
 	}
 }
 
 void TwitterClient::serverListener(void)
 {
 	pthread_t pid;
-	threadParam* classPointer;
+	threadParam classPointer;
 
-	classPointer = (threadParam*) malloc(sizeof(threadParam));
+	classPointer.client = this;
+	classPointer.socket = clientSocket;
 
-	classPointer->client = this;
-	classPointer->socket = &clientSocket;
-
-	pthread_create(&pid, NULL, &listenThread, classPointer);
+	pthread_create(&pid, NULL, &listenThread, &classPointer);
 }
 
 void TwitterClient::sendToServer(const char* message)

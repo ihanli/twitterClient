@@ -7,7 +7,6 @@
 # Sun, 28.11.2010 22:00         #
 ###############################*/
 
-//#include <iostream>
 #include "TwitterClient.h"
 
 using namespace std;
@@ -27,7 +26,7 @@ int main(int argc, char **argv)
 
 	try
 	{
-		myClient.connectToServer();			// connect with server
+		myClient.connectToServer();
 
    		while(true)
    		{
