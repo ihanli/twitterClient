@@ -28,7 +28,6 @@ class TwitterClient{
         unsigned int getBufferSize(void);
         void setBufferSize(unsigned int size);
         void serverListener(void);
-//        void* listenThread(void* arg);
 
 	private:
 		SOCKET clientSocket;
