@@ -16,7 +16,7 @@
 class SocketBase
 {
 	public:
-		SocketBase(const WORD clientSocketVersion, const int type, const int protocol);
+		SocketBase(const WORD clientSocketVersion = MAKEWORD(2,0), const int type = SOCK_STREAM, const int protocol = 0);
 		void createSocket(SOCKET* base, int af);
 
 	private:

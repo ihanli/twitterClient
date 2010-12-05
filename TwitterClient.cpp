@@ -9,17 +9,17 @@
 
 #include "TwitterClient.h"
 
-TwitterClient::TwitterClient(const char* hostIP, const unsigned short port, unsigned int size, const int af, const WORD version, const int type, const int protocol) :
-               socketCreator(version, type, protocol), bufferSize(size)
+TwitterClient::TwitterClient(const char* hostIP, const unsigned short port) :
+               socketCreator()
 {
 	try
 	{
 		memset(&hostAddr, 0, sizeof(SOCKADDR_IN));
-		hostAddr.sin_family = af;
+		hostAddr.sin_family = AF_INET;
 		hostAddr.sin_port = htons(port);
 		hostAddr.sin_addr.s_addr = inet_addr(hostIP);
 
-		socketCreator.createSocket(&clientSocket, af);
+		socketCreator.createSocket(&clientSocket, AF_INET);
 	}
 	catch(unsigned char* e)
 	{
@@ -53,7 +53,7 @@ void TwitterClient::connectToServer(void)
 
 void TwitterClient::serverListener(void)
 {
-	char message[bufferSize];
+	char message[BUFFERSIZE];
 	string input;
 
 	if(kbhit())
@@ -80,7 +80,7 @@ void TwitterClient::sendToServer(const char* message)
 {
     int errorCode;
 
-	errorCode = send(clientSocket, message, bufferSize, 0);
+	errorCode = send(clientSocket, message, BUFFERSIZE, 0);
 
 	if(errorCode == SOCKET_ERROR)
 	{
@@ -92,7 +92,7 @@ void TwitterClient::receive(char* buffer)
 {
     int errorCode;
 
-	errorCode = recv(clientSocket, buffer, bufferSize, 0);
+	errorCode = recv(clientSocket, buffer, BUFFERSIZE, 0);
 
 	if(errorCode == 0)
 	{
@@ -103,5 +103,3 @@ void TwitterClient::receive(char* buffer)
 		throw "\nFAIL: Unable to receive message!";
 	}
 }
-
-unsigned int TwitterClient::getBufferSize(void){ return bufferSize; }

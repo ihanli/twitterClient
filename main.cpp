@@ -21,7 +21,7 @@ int main(void)
 
     TwitterClient myClient(input.c_str());
 
-    message = new char[myClient.getBufferSize()];
+    message = new char[BUFFERSIZE];
 
 	try
 	{

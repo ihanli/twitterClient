@@ -2,19 +2,17 @@
 1291127792 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\socketbase.cpp
 	"SocketBase.h"
 
-1291127792 d:\fhs\ws10\multimediale netzwerke\twitterclient\socketbase.h
+1291560897 d:\fhs\ws10\multimediale netzwerke\twitterclient\socketbase.h
 	<cstdio>
 	<winsock2.h>
 
 1291556608 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.cpp
 	"TwitterClient.h"
 
-1291557209 d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.h
+1291560950 d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.h
 	<iostream>
 	<string>
-	<list>
 	<conio.h>
-	<pthread.h>
 	"SocketBase.h"
 	"ExceptionTexter.h"
 
@@ -26,6 +24,6 @@
 	<sstream>
 	<cstdio>
 
-1291557139 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\main.cpp
+1291560690 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\main.cpp
 	"TwitterClient.h"
 

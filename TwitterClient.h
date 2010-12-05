@@ -12,27 +12,25 @@
 
 #include <iostream>
 #include <string>
-#include <list>
 #include <conio.h>
-#include <pthread.h>
 #include "SocketBase.h"
 #include "ExceptionTexter.h"
+
+#define BUFFERSIZE 140
 
 using namespace std;
 
 class TwitterClient{
     public:
-        TwitterClient(const char* hostIP, const unsigned short port = 3000, const unsigned int size = 140, const int af = AF_INET, const WORD version = MAKEWORD(2,0), const int type = SOCK_STREAM, const int protocol = 0);
+        TwitterClient(const char* hostIP, const unsigned short port = 3000);
         ~TwitterClient(void);
         void connectToServer(void);
-        unsigned int getBufferSize(void);
         void serverListener(void);
 
 	private:
 		SOCKET clientSocket;
 		SOCKADDR_IN hostAddr;
 		SocketBase socketCreator;
-		unsigned int bufferSize;
 
 		void sendToServer(const char* message);
         void receive(char* buffer);
