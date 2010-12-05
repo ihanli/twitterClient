@@ -80,13 +80,13 @@ void* listenThread(void* arg)
 
 			if(!strcmp("ETX", message))
 			{
-				printf(">");
 				getline(cin, input);
 				threadArg.client->sendToServer(input.c_str());
 				break;
 			}
 
 			printf(">%s", message);
+			printf(">");
 		}
 	}
 	catch(const char* failure)
@@ -94,6 +94,8 @@ void* listenThread(void* arg)
 		closesocket(threadArg.socket);
 		printf("%s", failure);
 	}
+
+	return NULL;
 }
 
 void TwitterClient::serverListener(void)

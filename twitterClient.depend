@@ -6,10 +6,10 @@
 	<cstdio>
 	<winsock2.h>
 
-1291491293 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.cpp
+1291546463 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.cpp
 	"TwitterClient.h"
 
-1291492779 d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.h
+1291546463 d:\fhs\ws10\multimediale netzwerke\twitterclient\twitterclient.h
 	<iostream>
 	<string>
 	<pthread.h>
@@ -24,6 +24,6 @@
 	<sstream>
 	<cstdio>
 
-1291492523 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\main.cpp
+1291546463 source:d:\fhs\ws10\multimediale netzwerke\twitterclient\main.cpp
 	"TwitterClient.h"
 
