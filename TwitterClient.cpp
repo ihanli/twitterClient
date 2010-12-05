@@ -15,11 +15,11 @@ TwitterClient::TwitterClient(const char* hostIP, const unsigned short port, unsi
 	try
 	{
 		memset(&hostAddr, 0, sizeof(SOCKADDR_IN));
-		hostAddr.sin_family = af;						// set host address
+		hostAddr.sin_family = af;
 		hostAddr.sin_port = htons(port);
 		hostAddr.sin_addr.s_addr = inet_addr(hostIP);
 
-		socketCreator.createSocket(&clientSocket, af);	// try to create clientsocket
+		socketCreator.createSocket(&clientSocket, af);
 	}
 	catch(unsigned char* e)
 	{
@@ -33,15 +33,6 @@ TwitterClient::~TwitterClient(void)
     WSACleanup();
 }
 
-void* listenThread(void* arg);
-
-struct threadParam
-{
-	TwitterClient* client;
-	SOCKET socket;
-	list<string>* messageList;
-};
-
 void TwitterClient::connectToServer(void)
 {
 
@@ -49,72 +40,22 @@ void TwitterClient::connectToServer(void)
 
 	printf("\nConnecting to host...");
 
-	errorCode = connect(clientSocket, (SOCKADDR*) &hostAddr, sizeof(SOCKADDR));		// connecting
+	errorCode = connect(clientSocket, (SOCKADDR*) &hostAddr, sizeof(SOCKADDR));
 
-	if(errorCode == SOCKET_ERROR)					// error handling
+	if(errorCode == SOCKET_ERROR)
 		throw "\nFAIL: Connecting failed!";
 
 	else
 	{
-		printf("\nSUCCESS: Connected to %s!", inet_ntoa(hostAddr.sin_addr));
-		printf("\n");
-//		getline(cin, input);
-//		sendToServer(input.c_str());
+		printf("\nSUCCESS: Connected to %s!\n", inet_ntoa(hostAddr.sin_addr));
 	}
-}
-
-void* listenThread(void* arg)
-{
-	pthread_detach(pthread_self());
-
-	threadParam threadArg = *((threadParam*) arg);
-	free(arg);
-
-	char message[140];
-	string input;
-
-	try
-	{
-		while(true)
-		{
-			threadArg.client->receive(message);
-
-			if(!strcmp("ETX", message))
-			{
-				while(!threadArg.messageList->empty())
-				{
-					printf(">%s", threadArg.messageList->front().c_str());
-					threadArg.messageList->pop_front();
-				}
-
-				break;
-			}
-
-			threadArg.messageList->push_back(message);
-		}
-	}
-	catch(const char* failure)
-	{
-		closesocket(threadArg.socket);
-		printf("%s", failure);
-	}
-
-	return NULL;
 }
 
 void TwitterClient::serverListener(void)
 {
-//	pthread_t pid;
-//	threadParam *classPointer;
-//
-//	classPointer = (threadParam*)malloc(sizeof(threadParam));
-//
-//	classPointer->client = this;
-//	classPointer->socket = clientSocket;
-//	classPointer->messageList = &pendingMessages;
-//
-//	pthread_create(&pid, NULL, &listenThread, classPointer);
-char message[140];
+	char message[bufferSize];
+	string input;
+
 	if(kbhit())
 	{
 		printf(">");
@@ -164,5 +105,3 @@ void TwitterClient::receive(char* buffer)
 }
 
 unsigned int TwitterClient::getBufferSize(void){ return bufferSize; }
-
-void TwitterClient::setBufferSize(unsigned int size){ bufferSize = size; }

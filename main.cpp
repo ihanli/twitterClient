@@ -11,13 +11,12 @@
 
 using namespace std;
 
-int main(int argc, char **argv)
+int main(void)
 {
 	string input;
-	string kbInput;
 	char* message;
 
-	printf("Please enter an IP and port (port is optional).\n");
+	printf("Please enter an IP: ");
 	getline(cin, input);
 
     TwitterClient myClient(input.c_str());
