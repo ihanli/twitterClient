@@ -39,6 +39,7 @@ struct threadParam
 {
 	TwitterClient* client;
 	SOCKET socket;
+	list<string>* messageList;
 };
 
 void TwitterClient::connectToServer(void)
@@ -56,9 +57,9 @@ void TwitterClient::connectToServer(void)
 	else
 	{
 		printf("\nSUCCESS: Connected to %s!", inet_ntoa(hostAddr.sin_addr));
-		printf("\n>");
-		getline(cin, input);
-		sendToServer(input.c_str());
+		printf("\n");
+//		getline(cin, input);
+//		sendToServer(input.c_str());
 	}
 }
 
@@ -80,13 +81,16 @@ void* listenThread(void* arg)
 
 			if(!strcmp("ETX", message))
 			{
-				getline(cin, input);
-				threadArg.client->sendToServer(input.c_str());
+				while(!threadArg.messageList->empty())
+				{
+					printf(">%s", threadArg.messageList->front().c_str());
+					threadArg.messageList->pop_front();
+				}
+
 				break;
 			}
 
-			printf(">%s", message);
-			printf(">");
+			threadArg.messageList->push_back(message);
 		}
 	}
 	catch(const char* failure)
@@ -100,13 +104,35 @@ void* listenThread(void* arg)
 
 void TwitterClient::serverListener(void)
 {
-	pthread_t pid;
-	threadParam classPointer;
+//	pthread_t pid;
+//	threadParam *classPointer;
+//
+//	classPointer = (threadParam*)malloc(sizeof(threadParam));
+//
+//	classPointer->client = this;
+//	classPointer->socket = clientSocket;
+//	classPointer->messageList = &pendingMessages;
+//
+//	pthread_create(&pid, NULL, &listenThread, classPointer);
+char message[140];
+	if(kbhit())
+	{
+		printf(">");
+		getline(cin, input);
+		sendToServer(input.c_str());
 
-	classPointer.client = this;
-	classPointer.socket = clientSocket;
+		while(true)
+		{
+			receive(message);
 
-	pthread_create(&pid, NULL, &listenThread, &classPointer);
+			if(!strcmp("ETX", message))
+			{
+				break;
+			}
+
+			printf(">%s", message);
+		}
+	}
 }
 
 void TwitterClient::sendToServer(const char* message)

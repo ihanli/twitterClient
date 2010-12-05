@@ -12,6 +12,8 @@
 
 #include <iostream>
 #include <string>
+#include <list>
+#include <conio.h>
 #include <pthread.h>
 #include "SocketBase.h"
 #include "ExceptionTexter.h"
@@ -35,6 +37,8 @@ class TwitterClient{
 		SocketBase socketCreator;
 		string input;
 		unsigned int bufferSize;
+		list<string> pendingMessages;
+		bool keyPressed;
 };
 
 #endif // CLIENT_H_INCLUDED
