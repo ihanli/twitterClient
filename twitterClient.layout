@@ -4,13 +4,19 @@
 	<File name="ExceptionTexter.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="563" topLine="0" />
 	</File>
-	<File name="TwitterClient.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="1634" topLine="40" />
+	<File name="SocketBase.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="3" />
 	</File>
-	<File name="TwitterClient.h" open="1" top="0" tabpos="8">
-		<Cursor position="350" topLine="16" />
+	<File name="SocketBase.h" open="1" top="0" tabpos="6">
+		<Cursor position="534" topLine="3" />
 	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="6">
-		<Cursor position="769" topLine="20" />
+	<File name="TwitterClient.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="1873" topLine="76" />
+	</File>
+	<File name="TwitterClient.h" open="1" top="0" tabpos="4">
+		<Cursor position="629" topLine="14" />
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="528" topLine="12" />
 	</File>
 </CodeBlocks_layout_file>
