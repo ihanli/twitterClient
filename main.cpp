@@ -19,18 +19,18 @@ int main(void)
 	printf("Please enter an IP: ");
 	getline(cin, input);
 
-    TwitterClient myClient(input.c_str());
+	// create the client with by giving it the server ip-address
+	TwitterClient myClient(input.c_str());
 
-    message = new char[BUFFERSIZE];
+	message = new char[BUFFERSIZE];
 
 	try
 	{
 		myClient.connectToServer();
 
-   		while(true)
-   		{
-   			myClient.serverListener();
-    	}
+		// run the client by starting it's listener
+		while(true)
+			myClient.serverListener();
 	}
 	catch(const char* failure)
 	{
@@ -39,5 +39,5 @@ int main(void)
 
 	delete [] message;
 
-    return 0;
+	return 0;
 }

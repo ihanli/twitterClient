@@ -16,6 +16,7 @@
 
 using namespace std;
 
-const char* exceptionTexter(const char* exceptionText, const int errorCode);
+// function that merges string and int to print on screen
+const char* exceptionTexter(const char* exceptionText, const int errorCode); 
 
 #endif // EXCEPTIONTEXTER_H_INCLUDED

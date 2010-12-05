@@ -13,7 +13,7 @@ const char* exceptionTexter(const char* exceptionText, const int errorCode)
 {
 	ostringstream finalException;
 
-	finalException << exceptionText;
+	finalException << exceptionText;	// int to string conversion via shifting
 	finalException << errorCode;
 	finalException << ")";
 

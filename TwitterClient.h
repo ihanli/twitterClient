@@ -21,11 +21,11 @@
 using namespace std;
 
 class TwitterClient{
-    public:
-        TwitterClient(const char* hostIP, const unsigned short port = 3000);
-        ~TwitterClient(void);
-        void connectToServer(void);
-        void serverListener(void);
+	public:
+		TwitterClient(const char* hostIP, const unsigned short port = 3000);
+		~TwitterClient(void);
+		void connectToServer(void);
+		void serverListener(void);
 
 	private:
 		SOCKET clientSocket;
@@ -33,7 +33,7 @@ class TwitterClient{
 		SocketBase socketCreator;
 
 		void sendToServer(const char* message);
-        void receive(char* buffer);
+		void receive(char* buffer);
 };
 
 #endif // CLIENT_H_INCLUDED

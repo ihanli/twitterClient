@@ -13,6 +13,7 @@
 #include <cstdio>
 #include <winsock2.h>
 
+// this socket base is the same as for the server
 class SocketBase
 {
 	public:

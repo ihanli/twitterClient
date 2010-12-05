@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Client.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\ExceptionTexter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -27,15 +24,18 @@
     <ClCompile Include="..\SocketBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\TwitterClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Client.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\ExceptionTexter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\SocketBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TwitterClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

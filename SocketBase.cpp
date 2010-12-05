@@ -10,10 +10,7 @@
 #include "SocketBase.h"
 
 SocketBase::SocketBase(const WORD clientSocketVersion, const int type, const int protocol) :
-		   version(clientSocketVersion), type(type), protocol(protocol)
-{
-
-}
+		   version(clientSocketVersion), type(type), protocol(protocol) {}
 
 void SocketBase::createSocket(SOCKET* base, int af)
 {

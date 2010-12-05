@@ -75,15 +75,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Client.cpp" />
     <ClCompile Include="..\ExceptionTexter.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\SocketBase.cpp" />
+    <ClCompile Include="..\TwitterClient.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Client.h" />
     <ClInclude Include="..\ExceptionTexter.h" />
     <ClInclude Include="..\SocketBase.h" />
+    <ClInclude Include="..\TwitterClient.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.txt" />
