@@ -14,7 +14,7 @@ TwitterClient::TwitterClient(const char* hostIP, const unsigned short port) :
 {
 	try
 	{
-		memset(&hostAddr, 0, sizeof(SOCKADDR_IN));		// allocate memory for the host address
+		memset(&hostAddr, 0, sizeof(SOCKADDR_IN));		// reset the host address to zero
 		hostAddr.sin_family = AF_INET;					// set the protocol, tcp/ip in this case
 		hostAddr.sin_port = htons(port);				// set the port
 		hostAddr.sin_addr.s_addr = inet_addr(hostIP);	// set the ip-address

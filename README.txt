@@ -9,8 +9,10 @@
 
 About:
 
-This Twitter fork a student project.
+This Twitter fork is a student project.
 It's to learn how to use sockets.
+
+You can find this project on http://github.com/ihanli/twitterClient
 
 Commands:
 
@@ -19,7 +21,7 @@ Commands:
 :p		->	pull your tweets from server
 :t [message]	->	new tweet
 :f [tweeter]	->	follow a given tweeter
-:whoami?	->	get my tweeter
+:me	->	get my tweeter
 
 Compilation guide for Visual Studio (2010 in my case):
 
